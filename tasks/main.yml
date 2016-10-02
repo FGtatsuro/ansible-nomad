@@ -1,0 +1,4 @@
+---
+# tasks file for nomad
+- name: Run specified tasks on current platform
+  include: "{{ ansible_system }}.yml"

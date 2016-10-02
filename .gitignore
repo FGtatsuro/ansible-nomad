@@ -1,0 +1,5 @@
+roles/*
+!roles/nomad
+
+# Ansible
+tests/*.retry
