@@ -4,7 +4,7 @@ describe command('nomad version') do
   its(:exit_status) { should eq 0 }
 end
 
-describe command('nomad version'), :if => ['alpine', 'debian'].include?(os[:family]) do
+describe command('nomad version'), :if => ['debian'].include?(os[:family]) do
   its(:stdout) { should contain("Nomad v0.4.1") }
 end
 
