@@ -1,2 +1,6 @@
 ---
 # tasks file for nomad(On OSX)
+- name: Install Nomad with Homebrew
+  homebrew:
+    name: 'nomad'
+    update_homebrew: yes
