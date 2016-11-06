@@ -23,6 +23,7 @@ matrix:
         - TARGET=localhost
         # Workaround for OSX.
         - PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
+        - EXTRA_VARS="nomad_config_src_dir='../tests/nomad.d/' nomad_config_remote_dir='/Users/travis/nomad.d' nomad_config_owner='travis' nomad_config_group='staff'"
     - os: linux
       dist: trusty
       language: python
@@ -40,6 +41,7 @@ matrix:
       env:
         - IMAGE_NAME=fgtatsuro/infra-bridgehead:debian-jessie
         - TARGET=container
+        - EXTRA_VARS="nomad_config_src_dir='../tests/nomad.d/'"
 
 # This role needs sudo, thus we can't use the new container infrastructure
 # sudo: false

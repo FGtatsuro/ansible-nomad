@@ -2,3 +2,23 @@
 # tasks file for nomad
 - name: Run specified tasks on current platform
   include: "{{ ansible_system }}.yml"
+- block:
+  - name: Ensure nomad_config_remote_dir exists
+    file:
+      path: "{{ nomad_config_remote_dir }}"
+      owner: "{{ nomad_config_owner }}"
+      group: "{{ nomad_config_group }}"
+      state: 'directory'
+  - name: Copy Nomad config files from nomad_config_src_dir to nomad_config_remote_dir
+    copy:
+      src: "{{ nomad_config_src_dir }}"
+      dest: "{{ nomad_config_remote_dir }}"
+      owner: "{{ nomad_config_owner }}"
+      group: "{{ nomad_config_group }}"
+  - name: Ensure Nomad config files are readable
+    file:
+      path: "{{ nomad_config_remote_dir }}"
+      recurse: yes
+      mode: 'a+r'
+  when: nomad_config_src_dir is defined
+  become: yes

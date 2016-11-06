@@ -8,11 +8,17 @@ namespace :spec do
   hosts = [
     {
       :name     =>  'localhost',
-      :backend  =>  'exec'
+      :backend  =>  'exec',
+      :nomad_config_remote_dir =>  '/Users/travis/nomad.d',
+      :nomad_config_owner  =>  'travis',
+      :nomad_config_group  =>  'staff'
     },
     {
       :name     =>  'container',
-      :backend  =>  'docker' 
+      :backend  =>  'docker',
+      :nomad_config_remote_dir =>  '/etc/nomad.d',
+      :nomad_config_owner  =>  'root',
+      :nomad_config_group  =>  'root'
     }
   ]
   if ENV['SPEC_TARGET'] then
@@ -28,6 +34,9 @@ namespace :spec do
     RSpec::Core::RakeTask.new(host[:name].to_sym) do |t|
       ENV['TARGET_HOST'] = host[:name]
       ENV['SPEC_TARGET_BACKEND'] = host[:backend]
+      ENV['NOMAD_CONFIG_REMOTE_DIR'] = host[:nomad_config_remote_dir]
+      ENV['NOMAD_CONFIG_OWNER'] = host[:nomad_config_owner]
+      ENV['NOMAD_CONFIG_GROUP'] = host[:nomad_config_group]
       t.pattern = "spec/nomad_spec.rb"
     end
   end
