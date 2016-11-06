@@ -21,6 +21,8 @@ The variables we can use in this role.
 
 ### Only Debian
 
+If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.
+
 |name|description|type|default|
 |---|---|---|---|
 |nomad_download_url|Download URL of Nomad archive. <br>If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.|str|https://releases.hashicorp.com/nomad/0.4.1/nomad_0.4.1_linux_amd64.zip|
