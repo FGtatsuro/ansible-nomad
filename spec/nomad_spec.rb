@@ -5,7 +5,7 @@ describe command('nomad version') do
 end
 
 describe command('nomad version'), :if => ['debian'].include?(os[:family]) do
-  its(:stdout) { should contain("Nomad v0.5.0") }
+  its(:stdout) { should contain("Nomad v0.5.4") }
 end
 
 describe file('/usr/local/bin/nomad') do
