@@ -19,7 +19,7 @@ end
   describe file(f) do
     it { should be_file }
     it { should be_readable }
-    it { should be_owned_by ENV['NOMAD_CONFIG_OWNER'] }
-    it { should be_grouped_into ENV['NOMAD_CONFIG_GROUP'] }
+    it { should be_owned_by ENV['NOMAD_OWNER'] }
+    it { should be_grouped_into ENV['NOMAD_GROUP'] }
   end
 end

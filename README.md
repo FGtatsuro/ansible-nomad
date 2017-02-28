@@ -24,23 +24,25 @@ The variables we can use in this role.
 |name|description|type|default|
 |---|---|---|---|
 |nomad_config_src_dir|Directory including Nomad config files on local. Config files are copied to `nomad_config_remote_dir` directory on remote.|str|It isn't defined in default. No Nomad config file is copied to remote.|
-|nomad_config_remote_dir|Directory including Nomad config files on remote. In almost cases, this value will be passed with `-config` option of Nomad.|str|/etc/nomad.d|
-|nomad_config_owner|User of `nomad_config_remote_dir` directory and Nomad config files under it.|str|root|
-|nomad_config_group|Group of `nomad_config_remote_dir` directory and Nomad config files under it.|str|root|
+|nomad_config_remote_dir|Directory including Nomad config files on remote. In almost cases, this value will be passed with `-config` option of Nomad. <br>It's owned by `nomad_owner`.|str|/etc/nomad.d|
+|nomad_owner|User of components related to Nomad.|str|root|
+|nomad_group|Group of components related to Nomad.|str|root|
 
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
-- The values of `nomad_config_remote_dir`, `nomad_config_owner`, and `nomad_config_group` are ignored when `nomad_config_src_dir` isn't defined.
+- The values of `nomad_config_remote_dir`, `nomad_owner`, and `nomad_group` are ignored when `nomad_config_src_dir` isn't defined.
 
-### Only Debian
+### Only Linux
 
-If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.
+These values are meaningful only on Linux.
 
 |name|description|type|default|
 |---|---|---|---|
-|nomad_download_url|Download URL of Nomad archive. <br>If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.|str|https://releases.hashicorp.com/nomad/0.5.0/nomad_0.5.0_linux_amd64.zip|
-|nomad_sha256|SHA256 signature of Nomad archive. <br>If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.|str|7f7b9af2b1ff3e2c6b837b6e95968415237bb304e1e82802bc42abf6f8645a43|
+|nomad_download_url|Download URL of Nomad archive.|str|https://releases.hashicorp.com/nomad/0.5.0/nomad_0.5.0_linux_amd64.zip|
+|nomad_sha256|SHA256 signature of Nomad archive.|str|7f7b9af2b1ff3e2c6b837b6e95968415237bb304e1e82802bc42abf6f8645a43|
 |nomad_download_tmppath|File path downloaded Nomad archive is put temporary.|str|/tmp/nomad.zip|
-|nomad_bin_dir|Directory path Nomad binary is put|str|/usr/local/bin|
+|nomad_bin_dir|Directory path Nomad binary is put. The path of Nomad binary is `{{ nomad_bin_dir }}/nomad`.|str|/usr/local/bin|
+
+- If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.
 
 Role Dependencies
 -----------------
