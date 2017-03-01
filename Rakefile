@@ -17,8 +17,8 @@ namespace :spec do
       :name     =>  'container',
       :backend  =>  'docker',
       :nomad_config_remote_dir =>  '/etc/nomad.d',
-      :nomad_owner  =>  'root',
-      :nomad_group  =>  'root'
+      :nomad_owner  =>  'nomad',
+      :nomad_group  =>  'nomad'
     }
   ]
   if ENV['SPEC_TARGET'] then

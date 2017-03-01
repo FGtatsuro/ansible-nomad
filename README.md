@@ -25,8 +25,8 @@ The variables we can use in this role.
 |---|---|---|---|
 |nomad_config_src_dir|Directory including Nomad config files on local. Config files are copied to `nomad_config_remote_dir` directory on remote.|str|It isn't defined in default. No Nomad config file is copied to remote.|
 |nomad_config_remote_dir|Directory including Nomad config files on remote. In almost cases, this value will be passed with `-config` option of Nomad. <br>It's owned by `nomad_owner`.|str|/etc/nomad.d|
-|nomad_owner|User of components related to Nomad.|str|root|
-|nomad_group|Group of components related to Nomad.|str|root|
+|nomad_owner|User of components related to Nomad.|str|nomad|
+|nomad_group|Group of components related to Nomad.|str|nomad|
 
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
 - The values of `nomad_config_remote_dir`, `nomad_owner`, and `nomad_group` are ignored when `nomad_config_src_dir` isn't defined.
