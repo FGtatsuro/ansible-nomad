@@ -28,7 +28,7 @@ matrix:
         - ps -ef | grep nomad
         - bundle exec rake spec SPEC_TARGET=${TARGET}
         # For debug
-        - ps -ef | grep consul
+        - ps -ef | grep nomad
       env:
         - TARGET=localhost
         # Workaround for OSX.

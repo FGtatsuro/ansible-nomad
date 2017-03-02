@@ -1,7 +1,7 @@
 require "spec_helper_#{ENV['SPEC_TARGET_BACKEND']}"
 
 [
-  'nomad agent-info',
+  # 'nomad agent-info',
   "nomad agent-info -address=http://#{ENV['NOMAD_ADVERTISE_ADDR']}:4646"
 ].each do |c|
   describe command(c) do
