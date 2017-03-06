@@ -27,6 +27,7 @@ matrix:
         - nohup nomad agent -dev -bind=${IP} &
         # For debug
         - cat nohup.out
+        - sleep 10
         - ps -ef | grep nomad
         - bundle exec rake spec SPEC_TARGET=${TARGET}
         # For debug
