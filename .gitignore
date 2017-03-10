@@ -3,3 +3,7 @@ roles/*
 
 # Ansible
 tests/*.retry
+
+.vagrant
+.bundle/
+vendor/

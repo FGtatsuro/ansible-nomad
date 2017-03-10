@@ -3,3 +3,13 @@ localhost       ansible_connection=local
 
 [docker_container]
 container       ansible_connection=docker
+
+[cluster]
+server  ansible_port=2225 ansible_ssh_private_key_file='.vagrant/machines/server/virtualbox/private_key'
+client  ansible_port=2226 ansible_ssh_private_key_file='.vagrant/machines/client/virtualbox/private_key'
+
+[cluster:vars]
+ansible_connection=ssh
+ansible_user=vagrant
+ansible_host=127.0.0.1
+nomad_config_src_dir=./nomad.d/
