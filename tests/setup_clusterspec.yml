@@ -8,9 +8,6 @@
     - role: FGtatsuro.docker-toolbox
       docker_install_machine: no
       docker_install_compose: no
-      docker_group_append_users:
-        - 'vagrant'
-        - 'nomad'
   tasks:
     - name: Ensure docker daemon runs
       service:
