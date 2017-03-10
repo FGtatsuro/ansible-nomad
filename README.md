@@ -31,6 +31,20 @@ The variables we can use in this role.
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
 - The values of `nomad_config_remote_dir`, `nomad_owner`, and `nomad_group` are ignored when `nomad_config_src_dir` isn't defined.
 
+### Only not-container
+
+These values are related to daemon script of Nomad, and these are meaningful on not-container environment.
+Container doesn't use daemon script because main program in container must run on foreground.
+
+|name|description|type|default|
+|---|---|---|---|
+|nomad_daemon_log_dir|Directory including log files of daemon(named `stdout.log` and `stderr.log`). <br>It's owned by `nomad_owner`.|str|/var/log/nomad|
+|nomad_daemon_pid_dir|Directory including PID file of daemon(named `nomad.pid`). <br>It's owned by `nomad_owner`.|str|/var/run/nomad|
+|nomad_daemon_script_dir|Directory including daemon script(named `daemons.py`). <br>It's owned by `nomad_owner`.|str|/opt/nomad|
+
+- It's better to use dedicated directories for `nomad_daemon_log_dir` and `nomad_daemon_pid_dir`.
+  If you use existing directores(ex. `/var/log`, `/var/run`), this role mayn't work well.
+
 ### Only Linux
 
 These values are meaningful only on Linux.
@@ -42,6 +56,7 @@ These values are meaningful only on Linux.
 |nomad_download_tmppath|File path downloaded Nomad archive is put temporary.|str|/tmp/nomad.zip|
 |nomad_bin_dir|Directory path Nomad binary is put. The path of Nomad binary is `{{ nomad_bin_dir }}/nomad`.|str|/usr/local/bin|
 
+- `nomad_bin_dir` should exist in `PATH` environment variable. Or the daemon script can't work well.
 - If you want to overwrite values, please also check https://www.nomadproject.io/downloads.html.
 
 Role Dependencies
