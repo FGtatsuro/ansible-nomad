@@ -86,6 +86,9 @@ $ vagrant ssh server -c "sudo su -l nomad -c 'mkdir -p /tmp/nomad && nohup nomad
 $ vagrant ssh client -c "sudo su -l nomad -c 'mkdir -p /tmp/nomad && nohup nomad agent -client -join=192.168.50.4 -bind=192.168.50.5 -data-dir=/tmp/nomad -dc=dc1 -config=/etc/nomad.d &'"
 $ vagrant ssh server -c "nomad init"
 $ vagrant ssh server -c "nomad run -address=http://192.168.50.4:4646 example.nomad"
+$ bundle install --path vendor/bundle
+$ bundle exec rake spec:server
+$ bundle exec rake spec:client
 ```
 
 License
