@@ -1,0 +1,5 @@
+---
+nomad_config_src_dir: './nomad.d/'
+docker_group_append_users:
+  - 'vagrant'
+  - 'nomad'
