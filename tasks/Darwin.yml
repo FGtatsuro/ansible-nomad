@@ -4,3 +4,14 @@
   homebrew:
     name: 'nomad'
     update_homebrew: yes
+- block:
+  - name: Ensure nomad_group exists
+    group:
+      name: "{{ nomad_group }}"
+      system: yes
+  - name: Ensure nomad_user exists and belongs to nomad_group
+    user:
+      name: "{{ nomad_owner }}"
+      group: "{{ nomad_group }}"
+      system: yes
+  become: yes
