@@ -3,6 +3,45 @@
 - name: Run specified tasks on current platform
   include: "{{ ansible_system }}.yml"
 - block:
+  - name: Ensure a directory related to daemon scripts exist
+    file:
+      path: "{{ nomad_daemon_script_dir }}"
+      owner: "{{ nomad_owner }}"
+      group: "{{ nomad_group }}"
+      state: 'directory'
+  - name: Ensure directory(for logging related to daemon) exist
+    file:
+      path: "{{ nomad_daemon_log_dir }}"
+      owner: "{{ nomad_owner }}"
+      group: "{{ nomad_group }}"
+      state: 'directory'
+  - name: Check path related to PID file of daemon
+    stat:
+      path: "{{ nomad_daemon_pid_dir  }}"
+    register: stat_daemon_pid_dir
+    changed_when: no
+  - name: Ensure directory(for lock file of daemon) exist
+    file:
+      path: "{{ nomad_daemon_pid_dir }}"
+      owner: "{{ nomad_owner }}"
+      group: "{{ nomad_group }}"
+      state: 'directory'
+    when: not stat_daemon_pid_dir.stat.exists
+  - name: Resolve the dependencies of daemon script
+    pip:
+      name: "{{ item }}"
+    with_items:
+      - python-daemon
+      - click
+  - name: Set daemon scripts
+    template:
+      src: "daemons.py.j2"
+      dest: "{{ nomad_daemon_script_dir }}/daemons.py"
+      owner: "{{ nomad_owner }}"
+      group: "{{ nomad_group }}"
+      mode: '0755'
+  become: yes
+- block:
   - name: Ensure nomad_config_remote_dir exists
     file:
       path: "{{ nomad_config_remote_dir }}"
