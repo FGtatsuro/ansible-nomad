@@ -104,10 +104,11 @@ To confirm the behavior of Nomad cluster(server-client mode), we run tests on Va
 ```
 $ pip install ansible
 $ ansible-galaxy install FGtatsuro.vagrant FGtatsuro.docker-toolbox
-$ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l localhost
+$ ansible-playbook tests/setup_cluster.yml -i tests/inventory -l localhost
 $ vagrant up
 $ ansible-playbook tests/test.yml -i tests/inventory -l cluster
-$ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l cluster
+$ ansible-playbook tests/setup_cluster.yml -i tests/inventory -l cluster
+$ ansible-playbook tests/run_cluster.yml -i tests/inventory -l cluster
 $ ansible-playbook tests/run_nomadjob.yml -i tests/inventory -l cluster
 #
 # Wait a minute. Submitting jobs takes a few time.
