@@ -18,7 +18,7 @@
 - hosts: server
   tasks:
     - name: Check whether nomad daemon runs on server
-      shell: 'pgrep nomad'
+      shell: "pgrep -f 'nomad agent'"
       register: check_nomad_run_server
       changed_when: no
       ignore_errors: yes
@@ -31,7 +31,7 @@
 - hosts: client
   tasks:
     - name: Check whether nomad daemon runs on client
-      shell: pgrep nomad
+      shell: "pgrep -f 'nomad agent'"
       register: check_nomad_run_client
       changed_when: no
       ignore_errors: yes
