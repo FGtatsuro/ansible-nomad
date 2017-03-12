@@ -15,3 +15,29 @@
         state: started
         enabled: yes
       become: yes
+- hosts: server
+  tasks:
+    - name: Check whether nomad daemon runs on server
+      shell: 'pgrep nomad'
+      register: check_nomad_run_server
+      changed_when: no
+      ignore_errors: yes
+    - name: Run nomad daemon on server
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -server -bootstrap-expect=1 -bind=192.168.50.4 -data-dir=/tmp/nomad -dc=dc1'"
+      args:
+        warn: no
+      when: check_nomad_run_server.rc != 0
+      become: yes
+- hosts: client
+  tasks:
+    - name: Check whether nomad daemon runs on client
+      shell: pgrep nomad
+      register: check_nomad_run_client
+      changed_when: no
+      ignore_errors: yes
+    - name: Run nomad daemon on client
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -client -join=192.168.50.4 -bind=192.168.50.5 -data-dir=/tmp/nomad -dc=dc1 -config=/etc/nomad.d'"
+      args:
+        warn: no
+      when: check_nomad_run_client.rc != 0
+      become: yes
