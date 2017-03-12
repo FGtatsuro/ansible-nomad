@@ -31,7 +31,7 @@ namespace :spec do
       :nomad_group  =>  'nomad',
       :nomad_server_addr  =>  '192.168.50.4',
       :nomad_client_addr  =>  '192.168.50.5',
-      :nomad_advertise_addr =>  '192.168.50.4',
+      :nomad_advertise_config_addr =>  '192.168.50.4',
       :nomad_server  =>  'true',
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_cluster_spec.rb'
     },
@@ -43,7 +43,7 @@ namespace :spec do
       :nomad_group  =>  'nomad',
       :nomad_server_addr  =>  '192.168.50.4',
       :nomad_client_addr  =>  '192.168.50.5',
-      :nomad_advertise_addr =>  '192.168.50.5',
+      :nomad_advertise_config_addr =>  '192.168.50.5',
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_cluster_spec.rb'
     }
   ]
@@ -63,7 +63,8 @@ namespace :spec do
       ENV['NOMAD_CONFIG_REMOTE_DIR'] = host[:nomad_config_remote_dir]
       ENV['NOMAD_OWNER'] = host[:nomad_owner]
       ENV['NOMAD_GROUP'] = host[:nomad_group]
-      ENV['NOMAD_ADVERTISE_ADDR'] = host[:nomad_advertise_addr]
+      ENV['NOMAD_ADVERTISE_CONFIG_ADDR'] = host[:nomad_advertise_config_addr]
+      ENV['NOMAD_ADVERTISE_ADDR'] = host[:nomad_advertise_config_addr]
       ENV['NOMAD_SERVER_ADDR'] = host[:nomad_server_addr]
       ENV['NOMAD_CLIENT_ADDR'] = host[:nomad_client_addr]
       ENV['NOMAD_SERVER'] = host[:nomad_server]

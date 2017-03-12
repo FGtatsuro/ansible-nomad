@@ -61,12 +61,12 @@ describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
   its(:content) { should match /#{Regexp.escape('datacenter = "dc1"')}/ }
 end
 
-if ENV['NOMAD_ADVERTISE_ADDR'] then
+if ENV['NOMAD_ADVERTISE_CONFIG_ADDR'] then
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
     its(:content) { should match /advertise/ }
-    its(:content) { should match /#{Regexp.escape("http = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
-    its(:content) { should match /#{Regexp.escape("rpc = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
-    its(:content) { should match /#{Regexp.escape("serf = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
+    its(:content) { should match /#{Regexp.escape("http = \"#{ENV['NOMAD_ADVERTISE_CONFIG_ADDR']}\"")}/ }
+    its(:content) { should match /#{Regexp.escape("rpc = \"#{ENV['NOMAD_ADVERTISE_CONFIG_ADDR']}\"")}/ }
+    its(:content) { should match /#{Regexp.escape("serf = \"#{ENV['NOMAD_ADVERTISE_CONFIG_ADDR']}\"")}/ }
   end
 else
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
