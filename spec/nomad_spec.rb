@@ -50,6 +50,14 @@ describe file(ENV['NOMAD_CONFIG_REMOTE_DIR']) do
   it { should be_grouped_into ENV['NOMAD_GROUP'] }
 end
 
+# Common settings
+describe file("#{ENV['CONSUL_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+  it { should be_file }
+  it { should be_readable }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",

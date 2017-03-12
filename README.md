@@ -29,7 +29,7 @@ The variables we can use in this role.
 |nomad_group|Group of components related to Nomad.|str|nomad|
 
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
-- The values of `nomad_config_remote_dir`, `nomad_owner`, and `nomad_group` are ignored when `nomad_config_src_dir` isn't defined.
+- Even if `nomadconfig_src_dir` isn't defined, `nomad_config_remote_dir` has a default config file generated from [./templates/nomad_common.json.j2](./templates/nomad_common.json.j2).
 
 ### Only not-container
 

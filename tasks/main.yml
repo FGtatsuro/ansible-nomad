@@ -42,22 +42,24 @@
       mode: '0755'
   become: yes
 - block:
-  - name: Ensure nomad_config_remote_dir exists
+  - name: Ensure a directory of Nomad configs exists
     file:
       path: "{{ nomad_config_remote_dir }}"
       owner: "{{ nomad_owner }}"
       group: "{{ nomad_group }}"
       state: 'directory'
-  - name: Copy Nomad config files from nomad_config_src_dir to nomad_config_remote_dir
-    copy:
-      src: "{{ nomad_config_src_dir }}"
-      dest: "{{ nomad_config_remote_dir }}"
-      owner: "{{ nomad_owner }}"
-      group: "{{ nomad_group }}"
-  - name: Ensure Nomad config files are readable
-    file:
-      path: "{{ nomad_config_remote_dir }}"
-      recurse: yes
-      mode: 'a+r'
+  - name: Set a default config file
+    template:
+     src: 'nomad_common.json.j2'
+     dest: "{{ nomad_config_remote_dir }}/nomad_common.json"
+     owner: "{{ nomad_owner }}"
+     group: "{{ nomad_group }}"
+  become: yes
+- name: set additional config files
+  copy:
+    src: "{{ nomad_config_src_dir }}"
+    dest: "{{ nomad_config_remote_dir }}"
+    owner: "{{ nomad_owner }}"
+    group: "{{ nomad_group }}"
   when: nomad_config_src_dir is defined
   become: yes
