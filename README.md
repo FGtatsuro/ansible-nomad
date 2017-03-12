@@ -30,6 +30,12 @@ The variables we can use in this role.
 
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
 - Even if `nomadconfig_src_dir` isn't defined, `nomad_config_remote_dir` has a default config file generated from [./templates/nomad_common.json.j2](./templates/nomad_common.json.j2).
+  The variables related to this default config file are as follows.
+  If you want to overwrite these values, please also check https://www.nomadproject.io/docs/agent/configuration/index.html.
+
+|name|description|type|default|
+|---|---|---|---|
+|nomad_default_config_data_dir|In Nomad configuration, it collesponds to [data_dir](https://www.nomadproject.io/docs/agent/configuration/index.html#data_dir).|str|/tmp/nomad|
 
 ### Only not-container
 
