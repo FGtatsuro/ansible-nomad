@@ -34,3 +34,26 @@ else
     its(:stdout) { should match /known_servers = 192.168.50.4:4647/ }
   end
 end
+
+describe file('/var/log/nomad/stdout.log') do
+  its(:content) { should match /Starting Nomad agent/ }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
+describe file('/var/log/nomad/stderr.log') do
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
+describe file('/var/run/nomad/nomad.pid') do
+  it { should be_file }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
+describe file('/tmp/nomad') do
+  it { should be_directory }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end

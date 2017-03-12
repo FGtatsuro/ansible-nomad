@@ -10,3 +10,21 @@ require "spec_helper_#{ENV['SPEC_TARGET_BACKEND']}"
     its(:stdout) { should match /raft_peers = #{ENV['NOMAD_ADVERTISE_ADDR']}:4647/ }
   end
 end
+
+describe file('/var/log/nomad/stdout.log') do
+  its(:content) { should match /Starting Nomad agent/ }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
+describe file('/var/log/nomad/stderr.log') do
+  its(:size) { should eq 0 }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
+
+describe file('/var/run/nomad/nomad.pid') do
+  it { should be_file }
+  it { should be_owned_by ENV['NOMAD_OWNER'] }
+  it { should be_grouped_into ENV['NOMAD_GROUP'] }
+end
