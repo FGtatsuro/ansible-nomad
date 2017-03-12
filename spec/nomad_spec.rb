@@ -77,6 +77,18 @@ else
   end
 end
 
+if ENV['NOMAD_CONSUL_ADDRESS'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /consul/ }
+    its(:content) { should match /#{Regexp.escape("address = \"#{ENV['NOMAD_CONSUL_ADDRESS']}\"")}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /consul/ }
+    its(:content) { should_not match /address/ }
+  end
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",

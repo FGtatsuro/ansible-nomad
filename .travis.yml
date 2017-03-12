@@ -38,7 +38,8 @@ matrix:
         - PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
         - >+
           EXTRA_VARS="nomad_config_src_dir='../tests/nomad.d/' nomad_config_remote_dir='/Users/travis/nomad.d'
-          nomad_owner='travis' nomad_group='staff'"
+          nomad_owner='travis' nomad_group='staff'
+          nomad_default_config_consul_address='127.0.0.1:8400'"
     - os: linux
       dist: trusty
       language: python

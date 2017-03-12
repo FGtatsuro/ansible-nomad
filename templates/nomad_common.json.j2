@@ -9,3 +9,8 @@ advertise {
   serf = "{{ nomad_default_config_advertise }}"
 }
 {% endif %}
+{% if nomad_default_config_consul_address is defined %}
+consul {
+  address = "{{ nomad_default_config_consul_address }}"
+}
+{% endif %}

@@ -13,6 +13,8 @@ namespace :spec do
       :nomad_owner  =>  'travis',
       :nomad_group  =>  'staff',
       :nomad_advertise_interface  =>  'en0',
+      # Consul doesn't run on CI, but I can check whether proper config is written in common setting file.
+      :nomad_consul_address => '127.0.0.1:8400',
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_dev_spec.rb'
     },
     {
@@ -68,6 +70,7 @@ namespace :spec do
       ENV['NOMAD_SERVER_ADDR'] = host[:nomad_server_addr]
       ENV['NOMAD_CLIENT_ADDR'] = host[:nomad_client_addr]
       ENV['NOMAD_SERVER'] = host[:nomad_server]
+      ENV['NOMAD_CONSUL_ADDRESS'] = host[:nomad_consul_address]
       if host[:nomad_advertise_interface] then
 
         # Traivs specified.
