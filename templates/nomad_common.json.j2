@@ -1,3 +1,11 @@
 data_dir = "{{ nomad_default_config_data_dir }}"
 bind_addr = "{{ nomad_default_config_bind_addr }}"
 datacenter = "{{ nomad_default_config_datacenter }}"
+
+{% if nomad_default_config_advertise is defined %}
+advertise {
+  http = "{{ nomad_default_config_advertise }}"
+  rpc = "{{ nomad_default_config_advertise }}"
+  serf = "{{ nomad_default_config_advertise }}"
+}
+{% endif %}

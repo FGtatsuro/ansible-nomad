@@ -61,6 +61,22 @@ describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
   its(:content) { should match /#{Regexp.escape('datacenter = "dc1"')}/ }
 end
 
+if ENV['NOMAD_ADVERTISE_ADDR'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /advertise/ }
+    its(:content) { should match /#{Regexp.escape("http = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
+    its(:content) { should match /#{Regexp.escape("rpc = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
+    its(:content) { should match /#{Regexp.escape("serf = \"#{ENV['NOMAD_ADVERTISE_ADDR']}\"")}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /advertise/ }
+    its(:content) { should_not match /http/ }
+    its(:content) { should_not match /rpc/ }
+    its(:content) { should_not match /serf/ }
+  end
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",

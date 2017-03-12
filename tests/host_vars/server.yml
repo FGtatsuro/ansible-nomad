@@ -1,0 +1,2 @@
+---
+nomad_default_config_advertise: '192.168.50.4'
