@@ -14,3 +14,8 @@ consul {
   address = "{{ nomad_default_config_consul_address }}"
 }
 {% endif %}
+{% if nomad_default_config_server_bootstrap_expect is defined %}
+server {
+  bootstrap_expect = {{ nomad_default_config_server_bootstrap_expect }}
+}
+{% endif %}

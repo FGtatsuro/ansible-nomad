@@ -40,6 +40,7 @@ The variables we can use in this role.
 |nomad_default_config_datacenter|In Nomad configuration, it collesponds to [datacenter](https://www.nomadproject.io/docs/agent/configuration/index.html#datacenter).|str|dc1|
 |nomad_default_config_advertise|In Nomad configuration, it collesponds to [advertise](https://www.nomadproject.io/docs/agent/configuration/index.html#advertise). <br>In this role, Same value is set as `advertise.http`, `advertise.rpc`, and `advertise.serf`.|str|It isn't defined in default.|
 |nomad_default_config_consul_address|In Nomad configuration, it collesponds to [consul.address](https://www.nomadproject.io/docs/agent/configuration/consul.html#address).|str|It isn't defined in default.|
+|nomad_default_config_server_bootstrap_expect|In Nomad configuration, it collesponds to [server.bootstrap_expect](https://www.nomadproject.io/docs/agent/configuration/server.html#bootstrap_expect).|str|It isn't defined in default.|
 
 ### Only not-container
 

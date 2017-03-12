@@ -89,6 +89,18 @@ else
   end
 end
 
+if ENV['NOMAD_BOOTSTRAP_EXPECT'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /server/ }
+    its(:content) { should match /bootstrap_expect = #{ENV['NOMAD_BOOTSTRAP_EXPECT']}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /server/ }
+    its(:content) { should_not match /bootstrap_expect/ }
+  end
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",

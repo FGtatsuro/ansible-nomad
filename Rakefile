@@ -35,6 +35,7 @@ namespace :spec do
       :nomad_client_addr  =>  '192.168.50.5',
       :nomad_advertise_config_addr =>  '192.168.50.4',
       :nomad_server  =>  'true',
+      :nomad_bootstrap_expect => 1,
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_cluster_spec.rb'
     },
     {
@@ -71,6 +72,7 @@ namespace :spec do
       ENV['NOMAD_CLIENT_ADDR'] = host[:nomad_client_addr]
       ENV['NOMAD_SERVER'] = host[:nomad_server]
       ENV['NOMAD_CONSUL_ADDRESS'] = host[:nomad_consul_address]
+      ENV['NOMAD_BOOTSTRAP_EXPECT'] = host[:nomad_bootstrap_expect]
       if host[:nomad_advertise_interface] then
 
         # Traivs specified.
