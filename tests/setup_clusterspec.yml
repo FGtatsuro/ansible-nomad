@@ -23,7 +23,7 @@
       changed_when: no
       ignore_errors: yes
     - name: Run nomad daemon on server
-      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -server -config=/etc/nomad.d'"
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -server'"
       args:
         warn: no
       when: check_nomad_run_server.rc != 0
@@ -36,7 +36,7 @@
       changed_when: no
       ignore_errors: yes
     - name: Run nomad daemon on client
-      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -client -join=192.168.50.4 -config=/etc/nomad.d'"
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -client -join=192.168.50.4'"
       args:
         warn: no
       when: check_nomad_run_client.rc != 0
