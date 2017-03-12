@@ -24,9 +24,10 @@ matrix:
         - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
         - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} --extra-vars="${EXTRA_VARS}" -vvvv
         - export IP=`ifconfig en0 | awk '/inet / {printf $2}'`
-        - nohup nomad agent -dev -bind=${IP} &
+        - /opt/nomad/daemons.py start -- -dev -bind=${IP}
         # For debug
-        - cat nohup.out
+        - cat /var/log/nomad/stdout.log
+        - cat /var/log/nomad/stderr.log
         - sleep 10
         - ps -ef | grep nomad
         - bundle exec rake spec SPEC_TARGET=${TARGET}
