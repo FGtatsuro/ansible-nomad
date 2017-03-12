@@ -97,10 +97,10 @@ $ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l localhost
 $ vagrant up
 $ ansible-playbook tests/test.yml -i tests/inventory -l cluster
 $ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l cluster
-$ vagrant ssh server -c "sudo su -l nomad -c 'mkdir -p /tmp/nomad && nohup nomad agent -server -bootstrap-expect=1 -bind=192.168.50.4 -data-dir=/tmp/nomad -dc=dc1 &'"
-$ vagrant ssh client -c "sudo su -l nomad -c 'mkdir -p /tmp/nomad && nohup nomad agent -client -join=192.168.50.4 -bind=192.168.50.5 -data-dir=/tmp/nomad -dc=dc1 -config=/etc/nomad.d &'"
-$ vagrant ssh server -c "nomad init"
-$ vagrant ssh server -c "nomad run -address=http://192.168.50.4:4646 example.nomad"
+$ ansible-playbook tests/run_nomadjob.yml -i tests/inventory -l cluster
+#
+# Wait a minute. Submitting jobs takes a few time.
+#
 $ bundle install --path vendor/bundle
 $ bundle exec rake spec:server
 $ bundle exec rake spec:client
