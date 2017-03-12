@@ -37,6 +37,7 @@ The variables we can use in this role.
 |---|---|---|---|
 |nomad_default_config_data_dir|In Nomad configuration, it collesponds to [data_dir](https://www.nomadproject.io/docs/agent/configuration/index.html#data_dir).|str|/tmp/nomad|
 |nomad_default_config_bind_addr|In Nomad configuration, it collesponds to [bind_addr](https://www.nomadproject.io/docs/agent/configuration/index.html#bind_addr).|str|0.0.0.0|
+|nomad_default_config_datacenter|In Nomad configuration, it collesponds to [datacenter](https://www.nomadproject.io/docs/agent/configuration/index.html#datacenter).|str|dc1|
 
 ### Only not-container
 

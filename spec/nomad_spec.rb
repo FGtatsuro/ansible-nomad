@@ -58,6 +58,7 @@ describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
   it { should be_grouped_into ENV['NOMAD_GROUP'] }
   its(:content) { should match /#{Regexp.escape('data_dir = "/tmp/nomad"')}/ }
   its(:content) { should match /#{Regexp.escape('bind_addr = "0.0.0.0"')}/ }
+  its(:content) { should match /#{Regexp.escape('datacenter = "dc1"')}/ }
 end
 
 # Custom settings
