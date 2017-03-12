@@ -10,6 +10,7 @@ nomad_daemon_pid_dir: '/var/run/nomad'
 nomad_daemon_script_dir: '/opt/nomad'
 
 nomad_default_config_data_dir: '/tmp/nomad'
+nomad_default_config_bind_addr: '0.0.0.0'
 
 nomad_download_url: 'https://releases.hashicorp.com/nomad/0.5.4/nomad_0.5.4_linux_amd64.zip'
 nomad_sha256: 'ed9eb471b9f5bab729cfa402db5aa56e1d935c328ac48327267e0ea53568d5c2'
