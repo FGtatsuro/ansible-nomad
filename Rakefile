@@ -35,7 +35,7 @@ namespace :spec do
       :nomad_client_addr  =>  '192.168.50.5',
       :nomad_advertise_config_addr =>  '192.168.50.4',
       :nomad_server  =>  'true',
-      :nomad_bootstrap_expect => 1,
+      :nomad_bootstrap_expect => '1',
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_cluster_spec.rb'
     },
     {
