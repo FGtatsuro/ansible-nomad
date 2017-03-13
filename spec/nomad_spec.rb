@@ -101,6 +101,18 @@ else
   end
 end
 
+if ENV['NOMAD_JOIN_SERVER'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /client/ }
+    its(:content) { should match /#{Regexp.escape("servers = [\"#{ENV['NOMAD_JOIN_SERVER']}\"]")}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /client/ }
+    its(:content) { should_not match /#{Regexp.escape('servers = [')}/ }
+  end
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",

@@ -20,7 +20,7 @@
       changed_when: no
       ignore_errors: yes
     - name: Run nomad daemon on client
-      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -client -join=192.168.50.4'"
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -client'"
       args:
         warn: no
       when: check_nomad_run_client.rc != 0

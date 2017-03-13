@@ -19,3 +19,8 @@ server {
   bootstrap_expect = {{ nomad_default_config_server_bootstrap_expect }}
 }
 {% endif %}
+{% if nomad_default_config_client_servers is defined %}
+client {
+  servers = ["{{ nomad_default_config_client_servers }}"]
+}
+{% endif %}
