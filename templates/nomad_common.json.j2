@@ -25,8 +25,14 @@ server {
 {% endif %}
 }
 {% endif %}
-{% if nomad_default_config_client_servers is defined %}
+{% if nomad_default_config_client_servers is defined or
+      nomad_default_config_client_enabled is defined %}
 client {
+{% if nomad_default_config_client_servers is defined %}
   servers = ["{{ nomad_default_config_client_servers }}"]
+{% endif %}
+{% if nomad_default_config_client_enabled is defined %}
+  enabled = {{ nomad_default_config_client_enabled | bool | lower }}
+{% endif %}
 }
 {% endif %}

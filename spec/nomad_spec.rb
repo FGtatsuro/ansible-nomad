@@ -99,6 +99,16 @@ else
   end
 end
 
+if ENV['NOMAD_CLIENT'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /client {\n(.*\n){0,2}  enabled = #{ENV['NOMAD_CLIENT']}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /client {\n(.*\n){0,2}  enabled =/ }
+  end
+end
+
 if ENV['NOMAD_BOOTSTRAP_EXPECT'] then
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
     its(:content) { should match /server {\n(.*\n){0,2}  bootstrap_expect = #{ENV['NOMAD_BOOTSTRAP_EXPECT']}/ }
