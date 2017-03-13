@@ -15,6 +15,7 @@ namespace :spec do
       :nomad_advertise_interface  =>  'en0',
       # Consul doesn't run on CI, but I can check whether proper config is written in common setting file.
       :nomad_consul_address => '127.0.0.1:8400',
+      :nomad_server  =>  'false',
       :pattern  =>  'spec/nomad_spec.rb,spec/nomad_daemon_dev_spec.rb'
     },
     {

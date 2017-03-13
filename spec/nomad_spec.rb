@@ -89,27 +89,23 @@ else
   end
 end
 
-if ENV['NOMAD_BOOTSTRAP_EXPECT'] then
+if ENV['NOMAD_JOIN_SERVER'] then
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
-    its(:content) { should match /server {/ }
-    its(:content) { should match /bootstrap_expect = #{ENV['NOMAD_BOOTSTRAP_EXPECT']}/ }
+    its(:content) { should match /client {\n(.*\n){0,2}  #{Regexp.escape("servers = [\"#{ENV['NOMAD_JOIN_SERVER']}\"]")}/ }
   end
 else
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
-    its(:content) { should_not match /server {/ }
-    its(:content) { should_not match /bootstrap_expect =/ }
+    its(:content) { should_not match /client {\n(.*\n){0,2}  #{Regexp.escape('servers = [')}/ }
   end
 end
 
-if ENV['NOMAD_JOIN_SERVER'] then
+if ENV['NOMAD_BOOTSTRAP_EXPECT'] then
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
-    its(:content) { should match /client {/ }
-    its(:content) { should match /#{Regexp.escape("servers = [\"#{ENV['NOMAD_JOIN_SERVER']}\"]")}/ }
+    its(:content) { should match /server {\n(.*\n){0,2}  bootstrap_expect = #{ENV['NOMAD_BOOTSTRAP_EXPECT']}/ }
   end
 else
   describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
-    its(:content) { should_not match /client {/ }
-    its(:content) { should_not match /#{Regexp.escape('servers = [')}/ }
+    its(:content) { should_not match /server {\n(.*\n){0,2}  bootstrap_expect =/ }
   end
 end
 
