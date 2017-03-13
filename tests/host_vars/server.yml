@@ -1,0 +1,4 @@
+---
+nomad_default_config_advertise: '192.168.50.4'
+nomad_default_config_server_bootstrap_expect: 1
+nomad_default_config_server_enabled: true

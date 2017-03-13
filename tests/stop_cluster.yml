@@ -1,0 +1,13 @@
+- hosts: cluster
+  tasks:
+    - name: Check whether nomad daemon runs
+      shell: "pgrep -f 'nomad agent'"
+      register: check_nomad_run
+      changed_when: no
+      ignore_errors: yes
+    - name: Stop nomad daemon
+      shell: "su -l nomad -c '/opt/nomad/daemons.py stop'"
+      args:
+        warn: no
+      when: check_nomad_run.rc == 0
+      become: yes

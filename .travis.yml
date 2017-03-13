@@ -24,9 +24,10 @@ matrix:
         - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
         - ansible-playbook tests/test.yml -i tests/inventory -l ${TARGET} --extra-vars="${EXTRA_VARS}" -vvvv
         - export IP=`ifconfig en0 | awk '/inet / {printf $2}'`
-        - nohup nomad agent -dev -bind=${IP} &
+        - /opt/nomad/daemons.py start -- -dev -bind=${IP}
         # For debug
-        - cat nohup.out
+        - cat /var/log/nomad/stdout.log
+        - cat /var/log/nomad/stderr.log
         - sleep 10
         - ps -ef | grep nomad
         - bundle exec rake spec SPEC_TARGET=${TARGET}
@@ -38,7 +39,9 @@ matrix:
         - PYTHONPATH="/Library/Python/2.7/site-packages:$PYTHONPATH"
         - >+
           EXTRA_VARS="nomad_config_src_dir='../tests/nomad.d/' nomad_config_remote_dir='/Users/travis/nomad.d'
-          nomad_owner='travis' nomad_group='staff'"
+          nomad_owner='travis' nomad_group='staff'
+          nomad_default_config_consul_address='127.0.0.1:8400'
+          nomad_default_config_server_enabled='false' nomad_default_config_client_enabled='false'"
     - os: linux
       dist: trusty
       language: python

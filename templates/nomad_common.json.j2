@@ -1,0 +1,38 @@
+data_dir = "{{ nomad_default_config_data_dir }}"
+bind_addr = "{{ nomad_default_config_bind_addr }}"
+datacenter = "{{ nomad_default_config_datacenter }}"
+
+{% if nomad_default_config_advertise is defined %}
+advertise {
+  http = "{{ nomad_default_config_advertise }}"
+  rpc = "{{ nomad_default_config_advertise }}"
+  serf = "{{ nomad_default_config_advertise }}"
+}
+{% endif %}
+{% if nomad_default_config_consul_address is defined %}
+consul {
+  address = "{{ nomad_default_config_consul_address }}"
+}
+{% endif %}
+{% if nomad_default_config_server_bootstrap_expect is defined or
+      nomad_default_config_server_enabled is defined %}
+server {
+{% if nomad_default_config_server_bootstrap_expect is defined %}
+  bootstrap_expect = {{ nomad_default_config_server_bootstrap_expect }}
+{% endif %}
+{% if nomad_default_config_server_enabled is defined %}
+  enabled = {{ nomad_default_config_server_enabled | bool | lower }}
+{% endif %}
+}
+{% endif %}
+{% if nomad_default_config_client_servers is defined or
+      nomad_default_config_client_enabled is defined %}
+client {
+{% if nomad_default_config_client_servers is defined %}
+  servers = ["{{ nomad_default_config_client_servers }}"]
+{% endif %}
+{% if nomad_default_config_client_enabled is defined %}
+  enabled = {{ nomad_default_config_client_enabled | bool | lower }}
+{% endif %}
+}
+{% endif %}

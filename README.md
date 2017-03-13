@@ -29,7 +29,21 @@ The variables we can use in this role.
 |nomad_group|Group of components related to Nomad.|str|nomad|
 
 - The value of `nomad_config_src_dir` is used as 'src' attribute of Ansible copy module. Thus, whether this value ends with '/' affects the behavior. (Ref. http://docs.ansible.com/ansible/copy_module.html)
-- The values of `nomad_config_remote_dir`, `nomad_owner`, and `nomad_group` are ignored when `nomad_config_src_dir` isn't defined.
+- Even if `nomadconfig_src_dir` isn't defined, `nomad_config_remote_dir` has a default config file generated from [./templates/nomad_common.json.j2](./templates/nomad_common.json.j2).
+  The variables related to this default config file are as follows.
+  If you want to overwrite these values, please also check https://www.nomadproject.io/docs/agent/configuration/index.html.
+
+|name|description|type|default|
+|---|---|---|---|
+|nomad_default_config_data_dir|In Nomad configuration, it collesponds to [data_dir](https://www.nomadproject.io/docs/agent/configuration/index.html#data_dir).|str|/tmp/nomad|
+|nomad_default_config_bind_addr|In Nomad configuration, it collesponds to [bind_addr](https://www.nomadproject.io/docs/agent/configuration/index.html#bind_addr).|str|0.0.0.0|
+|nomad_default_config_datacenter|In Nomad configuration, it collesponds to [datacenter](https://www.nomadproject.io/docs/agent/configuration/index.html#datacenter).|str|dc1|
+|nomad_default_config_advertise|In Nomad configuration, it collesponds to [advertise](https://www.nomadproject.io/docs/agent/configuration/index.html#advertise). <br>In this role, Same value is set as `advertise.http`, `advertise.rpc`, and `advertise.serf`.|str|It isn't defined in default.|
+|nomad_default_config_consul_address|In Nomad configuration, it collesponds to [consul.address](https://www.nomadproject.io/docs/agent/configuration/consul.html#address).|str|It isn't defined in default.|
+|nomad_default_config_server_bootstrap_expect|In Nomad configuration, it collesponds to [server.bootstrap_expect](https://www.nomadproject.io/docs/agent/configuration/server.html#bootstrap_expect).|int|It isn't defined in default.|
+|nomad_default_config_client_servers|In Nomad configuration, it collesponds to [client.servers](https://www.nomadproject.io/docs/agent/configuration/client.html#servers). <br>But you can add only 1 server in default config.|str|It isn't defined in default.|
+|nomad_default_config_server_enabled|In Nomad configuration, it collesponds to [server.enabled](https://www.nomadproject.io/docs/agent/configuration/server.html#enabled).|bool|It isn't defined in default.|
+|nomad_default_config_client_enabled|In Nomad configuration, it collesponds to [client.enabled](https://www.nomadproject.io/docs/agent/configuration/client.html#enabled).|bool|It isn't defined in default.|
 
 ### Only not-container
 
@@ -93,10 +107,11 @@ To confirm the behavior of Nomad cluster(server-client mode), we run tests on Va
 ```
 $ pip install ansible
 $ ansible-galaxy install FGtatsuro.vagrant FGtatsuro.docker-toolbox
-$ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l localhost
+$ ansible-playbook tests/setup_cluster.yml -i tests/inventory -l localhost
 $ vagrant up
 $ ansible-playbook tests/test.yml -i tests/inventory -l cluster
-$ ansible-playbook tests/setup_clusterspec.yml -i tests/inventory -l cluster
+$ ansible-playbook tests/setup_cluster.yml -i tests/inventory -l cluster
+$ ansible-playbook tests/run_cluster.yml -i tests/inventory -l cluster
 $ ansible-playbook tests/run_nomadjob.yml -i tests/inventory -l cluster
 #
 # Wait a minute. Submitting jobs takes a few time.
