@@ -14,9 +14,15 @@ consul {
   address = "{{ nomad_default_config_consul_address }}"
 }
 {% endif %}
-{% if nomad_default_config_server_bootstrap_expect is defined %}
+{% if nomad_default_config_server_bootstrap_expect is defined or
+      nomad_default_config_server_enabled is defined %}
 server {
+{% if nomad_default_config_server_bootstrap_expect is defined %}
   bootstrap_expect = {{ nomad_default_config_server_bootstrap_expect }}
+{% endif %}
+{% if nomad_default_config_server_enabled is defined %}
+  enabled = {{ nomad_default_config_server_enabled | bool | lower }}
+{% endif %}
 }
 {% endif %}
 {% if nomad_default_config_client_servers is defined %}

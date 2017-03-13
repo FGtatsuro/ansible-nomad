@@ -42,6 +42,7 @@ The variables we can use in this role.
 |nomad_default_config_consul_address|In Nomad configuration, it collesponds to [consul.address](https://www.nomadproject.io/docs/agent/configuration/consul.html#address).|str|It isn't defined in default.|
 |nomad_default_config_server_bootstrap_expect|In Nomad configuration, it collesponds to [server.bootstrap_expect](https://www.nomadproject.io/docs/agent/configuration/server.html#bootstrap_expect).|str|It isn't defined in default.|
 |nomad_default_config_client_servers|In Nomad configuration, it collesponds to [client.servers](https://www.nomadproject.io/docs/agent/configuration/client.html#servers). <br>But you can add only 1 server in default config.|str|It isn't defined in default.|
+|nomad_default_config_server_enabled|In Nomad configuration, it collesponds to [server.enabled](https://www.nomadproject.io/docs/agent/configuration/server.html#enabled).|bool|It isn't defined in default.|
 
 ### Only not-container
 

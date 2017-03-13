@@ -7,7 +7,7 @@
       changed_when: no
       ignore_errors: yes
     - name: Run nomad daemon on server
-      shell: "su -l nomad -c '/opt/nomad/daemons.py start -- -server'"
+      shell: "su -l nomad -c '/opt/nomad/daemons.py start'"
       args:
         warn: no
       when: check_nomad_run_server.rc != 0

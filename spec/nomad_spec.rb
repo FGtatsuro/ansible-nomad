@@ -113,6 +113,16 @@ else
   end
 end
 
+if ENV['NOMAD_SERVER'] then
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should match /server {\n(.*\n){0,2}  enabled = #{ENV['NOMAD_SERVER']}/ }
+  end
+else
+  describe file("#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/nomad_common.json") do
+    its(:content) { should_not match /server {\n(.*\n){0,2}  enabled =/ }
+  end
+end
+
 # Custom settings
 [
   "#{ENV['NOMAD_CONFIG_REMOTE_DIR']}/server.hcl",
