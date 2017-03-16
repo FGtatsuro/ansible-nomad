@@ -50,8 +50,8 @@
       state: 'directory'
   - name: Set a default config file
     template:
-     src: 'nomad_common.json.j2'
-     dest: "{{ nomad_config_remote_dir }}/nomad_common.json"
+     src: 'nomad_common.hcl.j2'
+     dest: "{{ nomad_config_remote_dir }}/nomad_common.hcl"
      owner: "{{ nomad_owner }}"
      group: "{{ nomad_group }}"
   become: yes
