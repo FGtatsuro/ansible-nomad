@@ -65,8 +65,8 @@ These values are meaningful only on Linux.
 
 |name|description|type|default|
 |---|---|---|---|
-|nomad_download_url|Download URL of Nomad archive.|str|https://releases.hashicorp.com/nomad/0.7.0/nomad_0.7.0_linux_amd64.zip|
-|nomad_sha256|SHA256 signature of Nomad archive.|str|b3b78dccbdbd54ddc7a5ffdad29bce2d745cac93ea9e45f94e078f57b756f511|
+|nomad_download_url|Download URL of Nomad archive.|str|https://releases.hashicorp.com/nomad/0.7.1/nomad_0.7.1_linux_amd64.zip|
+|nomad_sha256|SHA256 signature of Nomad archive.|str|72b32799c2128ed9d2bb6cbf00c7600644a8d06c521a320e42d5493a5d8a789a|
 |nomad_download_tmppath|File path downloaded Nomad archive is put temporary.|str|/tmp/nomad.zip|
 |nomad_bin_dir|Directory path Nomad binary is put. The path of Nomad binary is `{{ nomad_bin_dir }}/nomad`.|str|/usr/local/bin|
 
